@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    height: 500px;
+    width: 300px;
+    overflow: hidden;
+    font-size: 9px;
+}
+
+@layer base {
+    #root {
+        /* dark scheme */
+        --color-bkg: 11 13 17;
+        --color-accent: 56 61 68;
+        --color-primary: 188 194 203;
+        --color-secondary: 148 163 184
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    #root[data-theme="light"] {
+        /* light scheme */
+        --color-bkg: 194 228 255;
+        --color-accent: 125 152 190;
+        --color-primary: 30 41 59;
+        --color-secondary: 102 117 138;
+
+    }
+}
