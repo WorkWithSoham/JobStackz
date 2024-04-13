@@ -1,6 +1,7 @@
 import React from "react";
 import {Application} from "../utils/inteface.ts";
 import {api, max_id} from "../data/api.service.ts";
+import moment from "moment/moment";
 
 export const Create = () => {
 
@@ -14,12 +15,10 @@ export const Create = () => {
             position: valueSet.position.value,
             notes: valueSet.notes.value,
             id: max_id,
-            app_date: new Date().toISOString()
+            app_date: moment(Date.now()).format("YYYY-MM-DD")
         }
 
         await api.set_application(data)
-
-        console.log(await api.get_all_applications())
 
         valueSet.reset();
     }

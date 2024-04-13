@@ -24,7 +24,7 @@ export const Main = () => {
         <div className="p-1 text-center text-xs">
             <h1 className="text-xl text-center underline underline-offset-4 text-primary">Applications Tracker</h1>
             <TabComponent callback={tabComponentCallback}/>
-            <div className="container border mt-2 border-accent/60">
+            <div className="container border h-[415px] overflow-y-scroll mt-2 border-accent/60">
                 {
                     renderSwitch()
                 }
