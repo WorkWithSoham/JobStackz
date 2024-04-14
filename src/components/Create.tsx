@@ -1,9 +1,12 @@
-import React from "react";
-import {Application} from "../utils/inteface.ts";
+import React, {useState} from "react";
+import {Application, emptyApplication} from "../utils/inteface.ts";
 import {api, max_id} from "../data/api.service.ts";
 import moment from "moment/moment";
 
+
 export const Create = (props: { app: Application }) => {
+
+    const [defaultApplication, setDefaultApplication] = useState<Application>(props.app)
 
     const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -30,23 +33,23 @@ export const Create = (props: { app: Application }) => {
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="company"
                     placeholder="Company name"
-                    defaultValue={props.app.company}
+                    defaultValue={defaultApplication.company}
                 />
                 <input
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="position"
                     placeholder="Position"
-                    defaultValue={props.app.position}
+                    defaultValue={defaultApplication.position}
                 />
                 <input
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="jobLink"
                     placeholder="Job Link"
-                    defaultValue={props.app.jobLink}
+                    defaultValue={defaultApplication.jobLink}
                 />
                 <select
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30"
-                    name="status" defaultValue={props.app.status}
+                    name="status" defaultValue={defaultApplication.status}
                 >
                     <option value="..." disabled={true}>Status</option>
                     <option value="Applied">Applied</option>
@@ -59,10 +62,20 @@ export const Create = (props: { app: Application }) => {
                     name="notes"
                     rows={5}
                     placeholder="Notes"
-                    defaultValue={props.app.notes}
+                    defaultValue={defaultApplication.notes}
                 />
                 <div className="inline-flex">
-                    <button className="bg-emerald-600/50 rounded-3xl p-3" type="submit">Submit</button>
+                    <input
+                        className="bg-accent/50 mx-1 rounded-3xl p-3 cursor-pointer"
+                        type="submit"
+                        value="Save Changes"
+                    />
+                    <input
+                        className="bg-accent/50 mx-1 rounded-3xl p-3 cursor-pointer"
+                        type="reset"
+                        onClick={() => setDefaultApplication(emptyApplication)}
+                        value="Reset"
+                    />
                 </div>
             </form>
         </div>

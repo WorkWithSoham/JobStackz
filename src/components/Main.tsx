@@ -2,14 +2,15 @@ import {TabComponent} from "./ElementComponents/TabComponent.tsx";
 import {useEffect, useState} from "react";
 import {ApplicationList} from "./ApplicationList.tsx";
 import {Create} from "./Create.tsx";
-import {Application} from "../utils/inteface.ts";
+import {Application, emptyApplication} from "../utils/inteface.ts";
 import moment from "moment";
 import {max_id} from "../data/api.service.ts";
+import {Notes} from "./NotesComponent.tsx";
 
 export const Main = () => {
 
+    //TODO
     useEffect(() => {
-
         chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
             const currentTabId = tabs[0].id ?? 0;
             const currentTabUrl = tabs[0].url;
@@ -63,15 +64,7 @@ export const Main = () => {
 
     const [index, setIndex] = useState("0");
     const [currentTab, setCurrentTab] = useState<string>("0");
-    const [defaultApplication, setDefaultApplication] = useState<Application>({
-        position: "",
-        company: "",
-        status: "Applied",
-        jobLink: "",
-        app_date: "",
-        notes: "",
-        id: -1
-    })
+    const [defaultApplication, setDefaultApplication] = useState<Application>(emptyApplication)
 
     const tabComponentCallback = (index: string) => {
         setCurrentTab(index);
@@ -83,6 +76,8 @@ export const Main = () => {
                 return <ApplicationList/>;
             case "1":
                 return <Create app={defaultApplication}/>;
+            case "2":
+                return <Notes/>
         }
     }
 

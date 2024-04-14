@@ -9,6 +9,15 @@ body {
     font-size: 9px;
     scrollbar-color: rgba(156, 163, 175, 0.6) rgba(156, 163, 175, 0.6);
     scrollbar-width: thin;
+    font-family: "Sedan", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.heading {
+    font-family: "Sedan", serif;
+    font-weight: 400;
+    font-style: italic;
 }
 
 @layer base {

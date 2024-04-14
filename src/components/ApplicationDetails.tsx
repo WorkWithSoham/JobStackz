@@ -1,10 +1,12 @@
 import {Application} from "../utils/inteface.ts";
 import React from "react";
 import moment from "moment";
+import {backArrow} from "../assets/icons/svgs.tsx";
 
 export const ApplicationDetails = (props: {
-    callback: (val: boolean, app: Application) => void,
-    application: Application
+    application: Application,
+    updateApplicationCallback: (val: boolean, app: Application) => void,
+    tabChangeCallback: () => void
 }) => {
 
     const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,12 +23,15 @@ export const ApplicationDetails = (props: {
         }
         valueSet.reset();
 
-        props.callback(false, data)
+        props.updateApplicationCallback(false, data)
     }
 
 
     return (
         <div className="p-3">
+            <button className="float-end"
+                    onClick={props.tabChangeCallback}>{backArrow}</button>
+            <br/>
             <form onSubmit={formSubmit}>
                 <p className="text-start">Company</p>
                 <input
@@ -80,7 +85,7 @@ export const ApplicationDetails = (props: {
                     defaultValue={props.application.notes}
                 />
 
-                <button className="bg-emerald-600/50 rounded-3xl p-3" type="submit">
+                <button className="bg-accent/50 rounded-3xl p-3" type="submit">
                     Save Changes
                 </button>
             </form>
