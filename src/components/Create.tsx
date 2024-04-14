@@ -3,7 +3,7 @@ import {Application} from "../utils/inteface.ts";
 import {api, max_id} from "../data/api.service.ts";
 import moment from "moment/moment";
 
-export const Create = () => {
+export const Create = (props: { app: Application }) => {
 
     const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -30,20 +30,23 @@ export const Create = () => {
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="company"
                     placeholder="Company name"
+                    defaultValue={props.app.company}
                 />
                 <input
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="position"
                     placeholder="Position"
+                    defaultValue={props.app.position}
                 />
                 <input
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="jobLink"
                     placeholder="Job Link"
+                    defaultValue={props.app.jobLink}
                 />
                 <select
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30"
-                    name="status"
+                    name="status" defaultValue={props.app.status}
                 >
                     <option value="..." disabled={true}>Status</option>
                     <option value="Applied">Applied</option>
@@ -56,8 +59,11 @@ export const Create = () => {
                     name="notes"
                     rows={5}
                     placeholder="Notes"
+                    defaultValue={props.app.notes}
                 />
-                <button className="bg-emerald-600/50 rounded-3xl p-3" type="submit">Submit</button>
+                <div className="inline-flex">
+                    <button className="bg-emerald-600/50 rounded-3xl p-3" type="submit">Submit</button>
+                </div>
             </form>
         </div>
     )

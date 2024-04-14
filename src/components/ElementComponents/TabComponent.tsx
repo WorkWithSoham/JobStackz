@@ -1,7 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {listIcon, newIcon} from "../../assets/icons/svgs.tsx"
 
-export const TabComponent = (props: { callback: (idx: string) => void }) => {
+export const TabComponent = (props: { callback: (idx: string) => void, setIndex: string }) => {
+
+    useEffect(() => {
+        if (props.setIndex === "1") {
+            setCurrentTab("1")
+        }
+    }, [props.setIndex]);
 
     const tabs: Array<{ name: string, icon: React.JSX.Element }> = [
         {
