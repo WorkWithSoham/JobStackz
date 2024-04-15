@@ -6,8 +6,11 @@ import {Application, emptyApplication} from "../utils/inteface.ts";
 import moment from "moment";
 import {max_id} from "../data/api.service.ts";
 import {Notes} from "./NotesComponent.tsx";
+import {Settings} from "./Settings.tsx";
+import logo from '../assets/icon.png'
 
-export const Main = () => {
+
+export const Main = (props: { setThemeCallback: (set_theme: string) => void }) => {
 
     //TODO
     useEffect(() => {
@@ -24,13 +27,14 @@ export const Main = () => {
                         JSON.stringify({msg: "request", url: currentWebsite}),
                         (res) => {
                             const defaultApplication: Application = {
+                                id: max_id,
+                                app_date: moment(Date.now()).format("YYYY-MM-DD"),
                                 position: res.position ?? "",
                                 company: res.company ?? "",
+                                location: res.location ?? "",
                                 status: "Applied",
                                 jobLink: currentTabUrl ?? "",
-                                app_date: moment(Date.now()).format("YYYY-MM-DD"),
                                 notes: "",
-                                id: max_id
                             }
                             console.log("Message sent", defaultApplication)
                             setDefaultApplication(defaultApplication)
@@ -78,13 +82,20 @@ export const Main = () => {
                 return <Create app={defaultApplication}/>;
             case "2":
                 return <Notes/>
+            case "3":
+                return <Settings setThemeCallback={props.setThemeCallback}/>
         }
     }
 
     return (
         <div className="p-1 text-center text-xs">
-            <h1 className="text-xl text-center underline underline-offset-4 text-primary">Applications
-                Tracker</h1>
+            <div className="inline-flex">
+                <img src={logo} className="h-7 w-7 mx-1 mt-1" alt="logo"/>
+                <h1 className="text-xl text-center underline underline-offset-4 text-primary">
+                    JobStack
+                </h1>
+            </div>
+
             <TabComponent callback={tabComponentCallback} setIndex={index}/>
             <div className="container border h-[415px] overflow-y-scroll mt-2 border-accent/60">
                 {

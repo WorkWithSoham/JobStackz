@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {listIcon, newIcon, notesIcon} from "../../assets/icons/svgs.tsx"
+import {listIcon, newIcon, notesIcon, settingsIcon} from "../../assets/icons/svgs.tsx"
 
 export const TabComponent = (props: { callback: (idx: string) => void, setIndex: string }) => {
 
@@ -21,6 +21,10 @@ export const TabComponent = (props: { callback: (idx: string) => void, setIndex:
         {
             name: "Notes",
             icon: notesIcon
+        },
+        {
+            name: "Settings",
+            icon: settingsIcon
         }
     ]
 
@@ -42,7 +46,7 @@ export const TabComponent = (props: { callback: (idx: string) => void, setIndex:
                                         props.callback(idx.toString())
                                     }}
                                 >
-                                    {tab.icon} {tab.name}
+                                    {tab.icon}
                                 </button> :
                                 <button
                                     className="inline-flex p-2 rounded-t-lg border-b-2 text-primary border-secondary group"

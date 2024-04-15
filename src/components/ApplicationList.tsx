@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {ApplicationDetails} from "./ApplicationDetails.tsx";
 import {Application} from "../utils/inteface.ts";
 import {api} from "../data/api.service.ts";
-// import {dummyData} from '../data/dummyData.ts'
+
 
 
 export const ApplicationList = () => {

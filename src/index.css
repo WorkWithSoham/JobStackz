@@ -21,7 +21,7 @@ body {
 }
 
 @layer base {
-    #root {
+    #app {
         /* dark scheme */
         --color-bkg: 11 13 17;
         --color-accent: 56 61 68;
@@ -31,7 +31,7 @@ body {
 }
 
 @media (prefers-color-scheme: dark) {
-    #root[data-theme="light"] {
+    #app[data-theme="light"] {
         /* light scheme */
         --color-bkg: 194 228 255;
         --color-accent: 125 152 190;

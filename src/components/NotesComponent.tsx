@@ -38,6 +38,7 @@ export const Notes = () => {
             <form onSubmit={onLinkedInMessageSubmit}>
                 <label> LinkedIn Connection Request message...</label>
                 <textarea
+                    required={true}
                     className="w-full my-1 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="notes"
                     maxLength={300}
@@ -64,6 +65,7 @@ export const Notes = () => {
             <form className="mt-10" onSubmit={onResourcesSubmit}>
                 <label>Keep your resources handy...</label>
                 <textarea
+                    required={true}
                     className="w-full my-1 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="resources"
                     rows={5}

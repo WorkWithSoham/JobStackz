@@ -2,6 +2,7 @@
 
 import {Application} from "../utils/inteface.ts";
 
+
 export const api = {
     get_all_applications,
     set_application,
@@ -9,7 +10,10 @@ export const api = {
     set_resources,
     set_linkedin_message,
     get_resources,
-    get_linkedin_message
+    get_linkedin_message,
+    get_theme,
+    set_theme,
+    clear_data
 }
 
 
@@ -18,7 +22,7 @@ export let apps: Application[] = []
 
 async function get_all_applications() {
     const data = await chrome.storage.local.get("applications");
-    apps = JSON.parse(data.applications)
+    apps = data.applications ? JSON.parse(data.applications) : [];
     max_id = apps.length
     return apps;
 }
@@ -48,4 +52,17 @@ async function set_resources(message: string) {
 async function get_resources() {
     const data = await chrome.storage.local.get("resources");
     return data.resources
+}
+
+async function get_theme() {
+    const data = await chrome.storage.local.get("theme");
+    return data.theme
+}
+
+async function set_theme(theme: string) {
+    await chrome.storage.local.set({"theme": theme})
+}
+
+async function clear_data() {
+    await chrome.storage.local.clear()
 }

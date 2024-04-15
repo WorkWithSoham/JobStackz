@@ -12,41 +12,60 @@ export const Create = (props: { app: Application }) => {
         e.preventDefault();
         const valueSet: EventTarget & HTMLFormElement = e.currentTarget
         const data: Application = {
+            id: max_id,
+            app_date: moment(Date.now()).format("YYYY-MM-DD"),
+            position: valueSet.position.value,
             company: valueSet.company.value,
+            location: valueSet.location.value,
             status: valueSet.status.value,
             jobLink: valueSet.jobLink.value,
-            position: valueSet.position.value,
-            notes: valueSet.notes.value,
-            id: max_id,
-            app_date: moment(Date.now()).format("YYYY-MM-DD")
+            notes: valueSet.notes.value
         }
 
         await api.set_application(data)
 
         valueSet.reset();
+        window.location.reload()
     }
 
     return (
         <div>
             <form className="p-3" onSubmit={formSubmit}>
+                <p className="text-start">Company</p>
                 <input
+                    required={true}
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="company"
                     placeholder="Company name"
                     defaultValue={defaultApplication.company}
                 />
+
+                <p className="text-start">Position</p>
                 <input
+                    required={true}
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="position"
                     placeholder="Position"
                     defaultValue={defaultApplication.position}
                 />
+
+                <p className="text-start">Job Link</p>
                 <input
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="jobLink"
                     placeholder="Job Link"
                     defaultValue={defaultApplication.jobLink}
                 />
+
+                <p className="text-start">Location</p>
+                <input
+                    className="w-full my-2 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
+                    name="location"
+                    placeholder="Location"
+                    defaultValue={defaultApplication.location}
+                />
+
+                <p className="text-start">Status</p>
                 <select
                     className="w-full my-2 h-10 rounded p-1 bg-accent/30"
                     name="status" defaultValue={defaultApplication.status}
@@ -57,6 +76,8 @@ export const Create = (props: { app: Application }) => {
                     <option value="Reject">Reject</option>
                     <option value="Process">In Process</option>
                 </select>
+
+                <p className="text-start">Notes</p>
                 <textarea
                     className="w-full my-2 rounded p-1 bg-accent/30 placeholder-primary/60"
                     name="notes"
@@ -64,6 +85,7 @@ export const Create = (props: { app: Application }) => {
                     placeholder="Notes"
                     defaultValue={defaultApplication.notes}
                 />
+
                 <div className="inline-flex">
                     <input
                         className="bg-accent/50 mx-1 rounded-3xl p-3 cursor-pointer"

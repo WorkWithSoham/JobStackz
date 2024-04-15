@@ -13,13 +13,14 @@ export const ApplicationDetails = (props: {
         e.preventDefault();
         const valueSet: EventTarget & HTMLFormElement = e.currentTarget
         const data: Application = {
+            id: props.application.id,
+            app_date: moment(Date.now()).format("YYYY-MM-DD"),
+            position: valueSet.position.value,
             company: valueSet.company.value,
+            location: valueSet.location.value,
             status: valueSet.status.value,
             jobLink: valueSet.jobLink.value,
-            position: valueSet.position.value,
             notes: valueSet.notes.value,
-            id: props.application.id,
-            app_date: moment(Date.now()).format("YYYY-MM-DD")
         }
         valueSet.reset();
 
@@ -55,6 +56,14 @@ export const ApplicationDetails = (props: {
                     name="jobLink"
                     placeholder="Job Link"
                     defaultValue={props.application.jobLink}
+                />
+
+                <p className="text-start">Location</p>
+                <input
+                    className="w-full my-1 h-10 rounded p-1 bg-accent/30 placeholder-primary/60"
+                    name="location"
+                    placeholder="Location"
+                    defaultValue={props.application.location}
                 />
 
                 <p className="text-start">Application Date</p>

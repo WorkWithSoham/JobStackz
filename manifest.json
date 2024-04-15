@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Job Tracking Extension",
+  "name": "JobStack",
   "version": "1.0.0",
   "description": "Track a list of all the Job applications easily!",
   "permissions": [
@@ -10,6 +10,10 @@
     "tabs",
     "unlimitedStorage"
   ],
+  "icons": {
+    "128": "src/assets/icon.png",
+    "48": "src/assets/icon.png"
+  },
   "action": {
     "default_popup": "index.html"
   },
