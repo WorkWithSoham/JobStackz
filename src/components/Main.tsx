@@ -12,7 +12,6 @@ import logo from '../assets/icon.png'
 
 export const Main = (props: { setThemeCallback: (set_theme: string) => void }) => {
 
-    //TODO
     useEffect(() => {
         chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
             const currentTabId = tabs[0].id ?? 0;
@@ -36,13 +35,12 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
                                 jobLink: currentTabUrl ?? "",
                                 notes: "",
                             }
-                            console.log("Message sent", defaultApplication)
                             setDefaultApplication(defaultApplication)
                             setIndex("1")
                             setCurrentTab("1")
                         }
                     )
-                }, 1000)
+                }, 100)
             }
         });
     }, []);
