@@ -5,9 +5,7 @@
   "description": "Track your job applications with ease! ✅",
   "permissions": [
     "activeTab",
-    "scripting",
     "storage",
-    "tabs",
     "unlimitedStorage"
   ],
   "icons": {
