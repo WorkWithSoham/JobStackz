@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "JobStack",
+  "name": "JobStackz",
   "version": "1.0.0",
-  "description": "Track a list of all the Job applications easily!",
+  "description": "Track your job applications with ease! ✅",
   "permissions": [
     "activeTab",
     "scripting",

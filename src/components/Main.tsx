@@ -56,6 +56,8 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
                 return "greenhouse";
             } else if (hostname.includes("lever")) {
                 return "lever";
+            } else if (hostname.includes("myworkdayjobs")) {
+                return "workday";
             } else {
                 return null;
             }
@@ -90,7 +92,7 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
             <div className="inline-flex">
                 <img src={logo} className="h-7 w-7 mx-1 mt-1" alt="logo"/>
                 <h1 className="text-xl text-center underline underline-offset-4 text-primary">
-                    JobStack
+                    JobStackz
                 </h1>
             </div>
 

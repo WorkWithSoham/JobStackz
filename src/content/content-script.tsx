@@ -50,6 +50,13 @@ const parseHtml = (url: string) => {
         }
     }
 
+    const extractWorkdayData = () => {
+        data.position = document.querySelector('[data-automation-id="jobPostingHeader"]')!.textContent!.trim();
+        data.location = document
+            .querySelector('[data-automation-id="locations"] dl dd')!.textContent!.trim();
+        data.company = window.location.href.split(".")[0].split("//")[1].trim()
+    }
+
 
     switch (url) {
         case "linkedin":
@@ -61,6 +68,10 @@ const parseHtml = (url: string) => {
         }
         case "lever": {
             extractLeverData()
+            break
+        }
+        case "workday": {
+            extractWorkdayData()
         }
 
     }

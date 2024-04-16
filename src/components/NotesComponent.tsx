@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {api} from "../data/api.service.ts";
+import {copyIcon} from "../assets/icons/svgs.tsx";
 
 export const Notes = () => {
 
@@ -53,12 +54,19 @@ export const Notes = () => {
                 <input
                     type="submit"
                     value="Save"
-                    className="!float-end rounded p-2 bg-accent/30 cursor-pointer"
+                    className="!float-end rounded p-1 bg-accent/30 cursor-pointer"
                 />
+                <button
+                    className="!float-end rounded mx-1 p-1 bg-accent/30 cursor-pointer"
+                    onClick={() => {
+                        navigator.clipboard.writeText(linkedInMessage).then()
+                    }}>
+                    {copyIcon}
+                </button>
                 <input
                     disabled={true}
-                    className="bg-transparent w-2/3"
-                    value={`${linkedInMessage.length}/300 (LinkedIn character limit)`}
+                    className="text-xs bg-transparent w-2/3"
+                    value={`${linkedInMessage.length}/300 (LinkedIn char limit)`}
                 />
             </form>
 
@@ -75,7 +83,7 @@ export const Notes = () => {
                 <input
                     type="submit"
                     value="Save"
-                    className="!float-end rounded p-2 bg-accent/30 cursor-pointer"
+                    className="!float-end rounded p-1 bg-accent/30 cursor-pointer"
                 />
             </form>
         </div>

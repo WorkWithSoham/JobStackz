@@ -121,7 +121,7 @@ export const Settings = (props: { setThemeCallback: (set_theme: string) => void 
 
             <div className="font-sans text-center">
                 <p className="text-base text-center"><span
-                    className="font-extrabold">JobStack v1.0.0</span> by Soham Tembe!</p>
+                    className="font-extrabold">JobStackz v1.0.0</span> by Soham Tembe!</p>
                 <p className="text-center font-extralight text-[9px]">Keep a track of your job
                     applications with ease!</p>
                 <p className="font-extralight m-2 mx-5 text-xs">Find me online</p>
