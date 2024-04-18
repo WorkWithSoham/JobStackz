@@ -1,14 +1,16 @@
 import {useEffect, useState} from "react";
-import {JsonToCsv} from "react-json-csv";
 import {
     darkIcon,
     deleteIcon,
     emailIcon,
-    exportIcon, githubIcon,
+    exportIcon,
+    githubIcon,
     lightIcon,
     linkedinIcon, websiteIcon
 } from "../assets/icons/svgs.tsx";
 import {api, apps} from "../data/api.service.ts";
+import CsvDownload from "react-json-to-csv";
+import {toast} from "react-toastify";
 
 
 export const Settings = (props: { setThemeCallback: (set_theme: string) => void }) => {
@@ -24,17 +26,15 @@ export const Settings = (props: { setThemeCallback: (set_theme: string) => void 
     const [theme, setTheme] = useState("dark");
     const [warning, setWarning] = useState(false);
 
-    const filename = 'Applications'
-    const fields = {
-        "id": "Application ID",
-        "app_date": "Application Date",
-        "position": "Position",
-        "company": "Company Name",
-        "location": "Job Location",
-        "status": "Status",
-        "jobLink": "Job Link",
-        "notes": "Notes"
-    }
+    const headers = ["Application ID",
+        "Application Date",
+        "Position",
+        "Company Name",
+        "Job Location",
+        "Status",
+        "Job Link",
+        "Notes"
+    ]
 
 
     const activeClassName: string = "bg-accent border border-secondary/60 font-bold py-2 px-4" +
@@ -68,12 +68,8 @@ export const Settings = (props: { setThemeCallback: (set_theme: string) => void 
                 <h2 className="font-bold">Export Applications' List</h2>
                 <div className="flex">
                     <button className="bg-accent/50 font-bold py-2 px-4 rounded">
-                        <JsonToCsv
-                            data={apps}
-                            filename={filename}
-                            fields={fields}
-                            text={exportIcon}
-                        />
+                        <CsvDownload data={apps} delimiter="," children={exportIcon}
+                                     headers={headers} filename="applications.csv"/>
                     </button>
                 </div>
             </div>
@@ -100,7 +96,10 @@ export const Settings = (props: { setThemeCallback: (set_theme: string) => void 
                             className="bg-accent/50 font-bold py-2 px-4 rounded"
                             onClick={() => {
                                 api.clear_data().then()
-                                window.location.reload()
+                                toast.error('All Data cleared.', {autoClose: 800})
+                                setTimeout(() => {
+                                    window.location.reload()
+                                }, 1000)
                             }}> Yes
                         </button>
                         <button

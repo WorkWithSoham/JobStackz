@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {ApplicationDetails} from "./ApplicationDetails.tsx";
 import {Application} from "../utils/inteface.ts";
 import {api} from "../data/api.service.ts";
-
+import {toast} from "react-toastify";
 
 
 export const ApplicationList = () => {
@@ -32,6 +32,7 @@ export const ApplicationList = () => {
         setApplications(newAppsState)
 
         await api.set_all_applications(newAppsState)
+        toast.error("Application deleted.")
     }
 
     const updateApplicationCallback = async (val: boolean, app: Application) => {

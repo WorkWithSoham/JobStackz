@@ -2,9 +2,13 @@ import React, {useState} from "react";
 import {Application, emptyApplication} from "../utils/inteface.ts";
 import {api, max_id} from "../data/api.service.ts";
 import moment from "moment/moment";
+import {toast} from "react-toastify";
 
 
-export const Create = (props: { app: Application }) => {
+export const Create = (props: {
+    app: Application,
+    tabComponentCallback: (index: string) => void
+}) => {
 
     const [defaultApplication, setDefaultApplication] = useState<Application>(props.app)
 
@@ -25,7 +29,8 @@ export const Create = (props: { app: Application }) => {
         await api.set_application(data)
 
         valueSet.reset();
-        window.location.reload()
+        toast.success("New Application saved! ✅")
+        props.tabComponentCallback("0")
     }
 
     return (
@@ -72,9 +77,11 @@ export const Create = (props: { app: Application }) => {
                 >
                     <option value="..." disabled={true}>Status</option>
                     <option value="Applied">Applied</option>
+                    <option value="Bookmarked">Bookmarked</option>
                     <option value="Interview">Interview</option>
-                    <option value="Reject">Reject</option>
                     <option value="Process">In Process</option>
+                    <option value="Offer">Offer</option>
+                    <option value="Reject">Reject</option>
                 </select>
 
                 <p className="text-start">Notes</p>

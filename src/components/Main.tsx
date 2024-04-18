@@ -8,6 +8,7 @@ import {max_id} from "../data/api.service.ts";
 import {Notes} from "./NotesComponent.tsx";
 import {Settings} from "./Settings.tsx";
 import logo from '../assets/icon.png'
+import {ToastContainer} from "react-toastify";
 
 
 export const Main = (props: { setThemeCallback: (set_theme: string) => void }) => {
@@ -15,7 +16,7 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
     useEffect(() => {
         chrome.tabs.query({currentWindow: true, active: true}, (tabs) => {
             const currentTabId = tabs[0].id ?? 0;
-            const currentTabUrl = tabs[0].url;
+            let currentTabUrl = tabs[0].url;
 
             const currentWebsite: string | null = parseURL(currentTabUrl!);
 
@@ -25,6 +26,9 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
                         currentTabId,
                         JSON.stringify({msg: "request", url: currentWebsite}),
                         (res) => {
+                            if (currentWebsite === 'linkedin') {
+                                currentTabUrl = currentTabUrl?.split("&")[0]
+                            }
                             const defaultApplication: Application = {
                                 id: max_id,
                                 app_date: moment(Date.now()).format("YYYY-MM-DD"),
@@ -72,6 +76,7 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
 
     const tabComponentCallback = (index: string) => {
         setCurrentTab(index);
+        setIndex(index)
     }
 
     const renderSwitch = () => {
@@ -79,7 +84,8 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
             case "0":
                 return <ApplicationList/>;
             case "1":
-                return <Create app={defaultApplication}/>;
+                return <Create app={defaultApplication}
+                               tabComponentCallback={tabComponentCallback}/>;
             case "2":
                 return <Notes/>
             case "3":
@@ -89,6 +95,19 @@ export const Main = (props: { setThemeCallback: (set_theme: string) => void }) =
 
     return (
         <div className="p-1 text-center text-xs">
+            <ToastContainer
+                toastClassName={
+                    "relative w-3/4 my-2 mx-auto text-primary/70 bg-accent flex p-1 min-h-10" +
+                    " rounded-md justify-between" +
+                    "overflow-hidden cursor-pointer"
+                }
+                bodyClassName={"text-xs block p-3"}
+                position="top-center"
+                autoClose={2000}
+                icon={false}
+                pauseOnHover={false}
+                pauseOnFocusLoss={false}
+            />
             <div className="inline-flex">
                 <img src={logo} className="h-7 w-7 mx-1 mt-1" alt="logo"/>
                 <h1 className="text-xl text-center underline underline-offset-4 text-primary">

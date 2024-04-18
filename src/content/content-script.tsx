@@ -7,7 +7,7 @@ const parseHtml = (url: string) => {
 
     const extractLinkedInData = () => {
         try {
-            data.position = document.querySelector('h2[class*="job-title"]')!.textContent!.trim();
+            data.position = document.querySelector('h1[class*="job-title"]')!.textContent!.trim();
             const companyElement = document.querySelector('.job-details-jobs-unified-top-card__primary-description-without-tagline');
             let companyName = "Not Found";
             let locationName = "Not Found";
@@ -81,7 +81,6 @@ const parseHtml = (url: string) => {
 
 chrome.runtime.onMessage.addListener(async (request, _sender, sendResponse) => {
     const msgData = JSON.parse(request);
-    console.log(msgData)
     if (msgData.msg === "request") {
         const sendData = parseHtml(msgData.url);
         sendResponse(sendData);

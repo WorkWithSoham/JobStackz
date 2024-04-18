@@ -2,6 +2,7 @@ import {Application} from "../utils/inteface.ts";
 import React from "react";
 import moment from "moment";
 import {backArrow} from "../assets/icons/svgs.tsx";
+import {toast} from "react-toastify";
 
 export const ApplicationDetails = (props: {
     application: Application,
@@ -23,7 +24,7 @@ export const ApplicationDetails = (props: {
             notes: valueSet.notes.value,
         }
         valueSet.reset();
-
+        toast.success("Application updated! ✅")
         props.updateApplicationCallback(false, data)
     }
 
@@ -80,9 +81,11 @@ export const ApplicationDetails = (props: {
                 >
                     <option value="..." disabled={true}>Status</option>
                     <option value="Applied">Applied</option>
+                    <option value="Bookmarked">Bookmarked</option>
                     <option value="Interview">Interview</option>
-                    <option value="Reject">Reject</option>
                     <option value="Process">In Process</option>
+                    <option value="Offer">Offer</option>
+                    <option value="Reject">Reject</option>
                 </select>
 
                 <p className="text-start">Notes</p>

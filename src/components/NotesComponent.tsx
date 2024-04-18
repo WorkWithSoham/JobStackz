@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {api} from "../data/api.service.ts";
 import {copyIcon} from "../assets/icons/svgs.tsx";
 
@@ -26,12 +28,14 @@ export const Notes = () => {
         e.preventDefault();
         const value: EventTarget & HTMLFormElement = e.currentTarget
         await api.set_linkedin_message(value.notes.value)
+        toast.success("Message saved successfully ✅")
     }
 
     const onResourcesSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const value: EventTarget & HTMLFormElement = e.currentTarget
         await api.set_resources(value.resources.value)
+        toast.success("Resources saved successfully ✅")
     }
 
     return (
@@ -57,9 +61,11 @@ export const Notes = () => {
                     className="!float-end rounded p-1 bg-accent/30 cursor-pointer"
                 />
                 <button
+                    type="button"
                     className="!float-end rounded mx-1 p-1 bg-accent/30 cursor-pointer"
                     onClick={() => {
                         navigator.clipboard.writeText(linkedInMessage).then()
+                        toast.success("Message copied!")
                     }}>
                     {copyIcon}
                 </button>
